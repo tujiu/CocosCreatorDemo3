@@ -12,40 +12,34 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        RegainSpeed : 320,
-        isRepeating: {
-            default: false,
-            visible: false
-        }
+        // foo: {
+        //     // ATTRIBUTES:
+        //     default: null,        // The default value will be used only when the component attaching
+        //                           // to a node for the first time
+        //     type: cc.SpriteFrame, // optional, default is typeof default
+        //     serializable: true,   // optional, default is true
+        // },
+        // bar: {
+        //     get () {
+        //         return this._bar;
+        //     },
+        //     set (value) {
+        //         this._bar = value;
+        //     }
+        // },
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
-
-    start () {
-        this.StartLine();
+    onLoad () {
+        var manager = cc.director.getCollisionManager();
+        manager.enabled = true;
+        manager.enabledDebugDraw = true;
     },
 
-    StartLine () {
-        this.node.stopAllActions();
-        this.node.runAction(cc.repeatForever(cc.moveBy(5, cc.v2(0, -100))));
-        this.isRepeating = false;
+    start () {
+
     },
 
     // update (dt) {},
-    RegainLine () {
-        if (this.isRepeating) {
-            return;
-        }
-
-        this.node.stopAllActions();
-        var duration = Math.abs(this.node.y) / this.RegainSpeed;
-        if (duration < 5) {
-            duration = 5;
-        }
-        this.node.runAction(cc.moveTo(duration, cc.v2(0, 0)).easing(cc.easeSineIn()));
-        this.isRegaining = true;
-    }
-
 });

@@ -28,6 +28,10 @@ cc.Class({
         mCanvas: {
             default: null,
             type: cc.Node
+        },
+        mHook: {
+            default: null,
+            type: cc.Node
         }
     },
 
@@ -102,6 +106,18 @@ cc.Class({
 
     },
 
+    onCollisionEnter: function (other, self) {
+        var pHook = this.mHook.getComponent('Hook');
+        pHook.RegainLine();
+
+        other.node.stopAllActions();
+        other.node.parent = this.node;
+        other.node.setPosition(cc.v2(0, 0));
+        other.node.runAction(cc.repeatForever(cc.sequence(
+            cc.rotateTo(0.5, -60 * other.node.scaleX),
+            cc.rotateTo(0.5, -30 * other.node.scaleX)
+        )));
+    }
 
 
 });
