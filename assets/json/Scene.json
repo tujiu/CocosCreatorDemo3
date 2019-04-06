@@ -1,12 +1,12 @@
 [
-    {"depth":	1,	"res":	"Fish/fish01",	"speed":1},
-    {"depth":	2,	"res":	"Fish/fish02",	"speed":1},
-    {"depth":	3,	"res":	"Fish/fish03",	"speed":1},
-    {"depth":	4,	"res":	"Fish/fish04",	"speed":1},
-    {"depth":	5,	"res":	"Fish/fish05",	"speed":1},
-    {"depth":	6,	"res":	"Fish/fish06",	"speed":1},
-    {"depth":	7,	"res":	"Fish/fish07",	"speed":1},
-    {"depth":	8,	"res":	"Fish/fish08",	"speed":1},
-    {"depth":	9,	"res":	"Fish/fish09",	"speed":1},
-    {"depth":	10,	"res":	"Fish/fish10",	"speed":1}
+    {"depth": 0, "score": 10, "res": "Fish/fish01", "speed":1},
+    {"depth": 1, "score": 11, "res": "Fish/fish02", "speed":2},
+    {"depth": 2, "score": 12, "res": "Fish/fish03", "speed":3},
+    {"depth": 3, "score": 13, "res": "Fish/fish04", "speed":4},
+    {"depth": 4, "score": 14, "res": "Fish/fish05", "speed":5},
+    {"depth": 5, "score": 15, "res": "Fish/fish06", "speed":6},
+    {"depth": 6, "score": 16, "res": "Fish/fish07", "speed":7},
+    {"depth": 7, "score": 17, "res": "Fish/fish08", "speed":8},
+    {"depth": 8, "score": 18, "res": "Fish/fish09", "speed":9},
+    {"depth": 9, "score": 19, "res": "Fish/fish10",  "speed":10}
 ]

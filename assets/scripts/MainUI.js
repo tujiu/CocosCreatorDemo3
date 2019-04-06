@@ -7,7 +7,6 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
-import GameData from 'GameData';
 
 cc.Class({
     extends: cc.Component,
@@ -28,43 +27,22 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
-        mFishPool: {
-            default: null,
-            type: cc.Node
-        },
-        mController: {
-            default: null,
-            type: cc.Node
-        },
-        mMainUI: {
-            default: null,
-            type: cc.Node
-        }
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad () {
-        var manager = cc.director.getCollisionManager();
-        manager.enabled = true;
-        manager.enabledDebugDraw = true;
-    },
+    // onLoad () {},
 
     start () {
 
     },
 
     // update (dt) {},
-
-    reset () {
-        GameData.instance.depth = 0;
-        GameData.instance.score = 0;
-
-        this.mFishPool.getComponent('FishPool').reset();
-        this.mController.removeAllChildren(true);
+    Hide () {
+        this.node.active = false;
     },
 
-    end () {
-        this.mMainUI.getComponent('MainUI').show();
+    show() {
+        this.node.active = true;
     }
 });

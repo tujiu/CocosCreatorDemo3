@@ -7,15 +7,18 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
+import GameData from "GameData";
 
 cc.Class({
     extends: cc.Component,
 
     properties: {
         RegainSpeed : 320,
-        isRepeating: {
-            default: false,
-            visible: false
+        isRegaining: false,
+        isStarted: false,
+        game: {
+            default: null,
+            type: cc.Node
         }
     },
 
@@ -24,18 +27,27 @@ cc.Class({
     // onLoad () {},
 
     start () {
-        this.StartLine();
+        // this.StartLine();
     },
 
     StartLine () {
         this.node.stopAllActions();
-        this.node.runAction(cc.repeatForever(cc.moveBy(5, cc.v2(0, -100))));
-        this.isRepeating = false;
+        this.node.runAction(cc.repeatForever(cc.moveBy(1, cc.v2(0, -100))));
+        this.isRegaining = false;
+        this.isStarted = true;
+        this.node.y = 0;
     },
 
-    // update (dt) {},
+    update (dt) {
+        if (this.isStarted) {
+            if (!this.isRegaining) {
+                GameData.instance.depth += dt;
+            }
+        }
+    },
+
     RegainLine () {
-        if (this.isRepeating) {
+        if (this.isRegaining) {
             return;
         }
 
@@ -44,7 +56,13 @@ cc.Class({
         if (duration < 5) {
             duration = 5;
         }
-        this.node.runAction(cc.moveTo(duration, cc.v2(0, 0)).easing(cc.easeSineIn()));
+        duration = 1;
+        this.node.runAction(cc.sequence(
+            cc.moveTo(duration, cc.v2(0, 0)).easing(cc.easeSineIn()),
+            cc.callFunc(() => {
+                console.log('finished gaining');
+                this.game.getComponent('Game').end();
+            })));
         this.isRegaining = true;
     }
 

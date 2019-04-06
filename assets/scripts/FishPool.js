@@ -47,6 +47,11 @@ cc.Class({
 
     },
 
+    reset () {
+        this.mFishPool.removeAllChildren(true);
+        this.mIndex = 0;
+    },
+
     update (dt) {
         this.mDepth = Math.floor(Math.abs(this.mHook.y) / 100);
         let data = this.mSceneData.json[this.mIndex];
@@ -59,6 +64,8 @@ cc.Class({
             })
             fish.x = Math.random() * 640 - 320;
             fish.y = this.mHook.y - 480 - 100;
+            fish.getComponent('Fish').mScore = data.score;
+            fish.getComponent('Fish').mSpeed = data.speed;
             this.mFishPool.addChild(fish);
             this.mIndex++;
         }

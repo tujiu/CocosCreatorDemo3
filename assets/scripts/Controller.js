@@ -7,6 +7,7 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
+import GameData from "GameData";
 
 cc.Class({
     extends: cc.Component,
@@ -39,7 +40,7 @@ cc.Class({
 
     // onLoad () {},
 
-    start () {
+    reset () {
         this.EnableTouch();
     },
 
@@ -117,6 +118,8 @@ cc.Class({
             cc.rotateTo(0.5, -60 * other.node.scaleX),
             cc.rotateTo(0.5, -30 * other.node.scaleX)
         )));
+        GameData.instance.score = other.node.getComponent('Fish').mScore;
+        this.DisableTouch();
     }
 
 

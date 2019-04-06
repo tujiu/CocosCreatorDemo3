@@ -8,39 +8,29 @@
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
 
-cc.Class({
+var GameData = cc.Class({
     extends: cc.Component,
 
+    statics: {
+        instance: null
+    },
+
     properties: {
-        mSpeed: {
-            default: 1,
-            type: cc.Float,
-            tooltip: '鱼的速度，默认为1，最小0.1，最大10',
-            min: 0.1
-        },
-        mScore: 1
+        score: 0,
+        depth: 0
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {},
 
+
     start () {
-        let x = this.node.x;
-        let duration = 5 - (this.node.x + 320) / 640 * 5;
-        let action = cc.sequence(
-            cc.moveTo(duration, cc.v2(320, this.node.y)),
-            cc.flipX(true),
-            cc.moveTo(duration, cc.v2(x, this.node.y)),
-            cc.moveTo(5 - duration, cc.v2(-320, this.node.y)),
-            cc.flipX(false),
-            cc.moveTo(5 - duration, cc.v2(x, this.node.y)),
-        );
-        this.node.runAction(cc.speed(cc.repeatForever(action), this.mSpeed));
+
     },
 
-    getScore() {
-        return mScore;
-    },
     // update (dt) {},
 });
+
+GameData.instance = new GameData();
+export default GameData;
