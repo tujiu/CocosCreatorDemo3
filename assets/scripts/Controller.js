@@ -26,11 +26,7 @@ cc.Class({
             default: false,
             visible: false
         },
-        mCanvas: {
-            default: null,
-            type: cc.Node
-        },
-        mHook: {
+        mHookScreen: {
             default: null,
             type: cc.Node
         }
@@ -50,6 +46,7 @@ cc.Class({
         }
 
         var oldPos = this.node.position;
+        this.mMoveToPos.y = oldPos.y;
         var direction = this.mMoveToPos.sub(oldPos).normalize();
         direction.y = 0;
         var newPos = oldPos.add(direction.mul(this.mSpeed * dt));
@@ -61,10 +58,10 @@ cc.Class({
             return;
         }
 
-        this.mCanvas.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
-        this.mCanvas.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
-        this.mCanvas.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
-        this.mCanvas.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancel, this);
+        this.mHookScreen.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
+        this.mHookScreen.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
+        this.mHookScreen.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
+        this.mHookScreen.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancel, this);
 
         this.mEnableTouch = true;
 
@@ -76,10 +73,10 @@ cc.Class({
             return;
         }
 
-        this.mCanvas.off(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
-        this.mCanvas.off(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
-        this.mCanvas.off(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
-        this.mCanvas.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancel, this);
+        this.mHookScreen.off(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
+        this.mHookScreen.off(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
+        this.mHookScreen.off(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
+        this.mHookScreen.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancel, this);
 
         this.mEnableTouch = false;
 
@@ -104,11 +101,11 @@ cc.Class({
     },
 
     onTouchCancel (event) {
-
+        this.mIsMoving = false;
     },
 
     onCollisionEnter: function (other, self) {
-        var pHook = this.mHook.getComponent('Hook');
+        var pHook = this.mHookScreen.getComponent('Hook');
         pHook.RegainLine();
 
         other.node.stopAllActions();
